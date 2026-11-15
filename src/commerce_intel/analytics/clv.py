@@ -14,9 +14,36 @@ from ._common import save_table
 warnings.filterwarnings("ignore")
 
 
+def rfm_summary(tx: pd.DataFrame, obs_end: pd.Timestamp) -> pd.DataFrame:
+    """BG/NBD inputs per customer (same definitions as lifetimes.utils.summary_data_from_transaction_data):
+    frequency = repeat purchase *days*, recency = days first->last purchase, T = days first purchase->obs_end,
+    monetary_value = mean spend per repeat purchase day (0 for one-time buyers)."""
+    daily = tx.groupby(["customer_unique_id", "purchase_date"], as_index=False).gmv.sum()
+    g = daily.groupby("customer_unique_id")
+    first, last = g.purchase_date.min(), g.purchase_date.max()
+    out = pd.DataFrame({
+        "frequency": g.size() - 1,
+        "recency": (last - first).dt.days.astype(float),
+        "T": (obs_end - first).dt.days.astype(float),
+    })
+    rep = daily[daily.purchase_date > daily.customer_unique_id.map(first)]
+    out["monetary_value"] = rep.groupby("customer_unique_id").gmv.mean().reindex(out.index).fillna(0.0)
+    out.index.name = "customer_unique_id"
+    return out
+
+
+def calibration_holdout(tx: pd.DataFrame, cal_end: pd.Timestamp, obs_end: pd.Timestamp) -> pd.DataFrame:
+    cal = rfm_summary(tx[tx.purchase_date <= cal_end], cal_end).rename(
+        columns={"frequency": "frequency_cal", "recency": "recency_cal", "T": "T_cal", "monetary_value": "monetary_value_cal"})
+    hold = tx[(tx.purchase_date > cal_end) & (tx.purchase_date <= obs_end)]
+    hold_days = hold.groupby(["customer_unique_id", "purchase_date"]).size().groupby("customer_unique_id").size()
+    cal["frequency_holdout"] = hold_days.reindex(cal.index).fillna(0).astype(float)
+    cal["duration_holdout"] = float((obs_end - cal_end).days)
+    return cal
+
+
 def run(con) -> dict:
     from lifetimes import BetaGeoFitter, GammaGammaFitter
-    from lifetimes.utils import summary_data_from_transaction_data
 
     tx = query(
         con,
@@ -27,10 +54,7 @@ def run(con) -> dict:
         """,
     )
     tx["purchase_date"] = pd.to_datetime(tx.purchase_date)
-    summary = summary_data_from_transaction_data(
-        tx, "customer_unique_id", "purchase_date", monetary_value_col="gmv",
-        observation_period_end=pd.Timestamp(SNAPSHOT_DATE), freq="D",
-    )
+    summary = rfm_summary(tx, pd.Timestamp(SNAPSHOT_DATE))
     bgf = BetaGeoFitter(penalizer_coef=0.01)
     bgf.fit(summary.frequency, summary.recency, summary["T"])
 
@@ -61,10 +85,7 @@ def run(con) -> dict:
     save_table(summary.reset_index(), "clv_customers")
 
     # calibration: fit on first 12 months, hold out last 8
-    from lifetimes.utils import calibration_and_holdout_data
-    cal = calibration_and_holdout_data(tx, "customer_unique_id", "purchase_date",
-                                       calibration_period_end=pd.Timestamp("2017-12-31"),
-                                       observation_period_end=pd.Timestamp(SNAPSHOT_DATE), freq="D")
+    cal = calibration_holdout(tx, pd.Timestamp("2017-12-31"), pd.Timestamp(SNAPSHOT_DATE))
     bgf_cal = BetaGeoFitter(penalizer_coef=0.01).fit(cal.frequency_cal, cal.recency_cal, cal.T_cal)
     cal["pred_holdout"] = bgf_cal.conditional_expected_number_of_purchases_up_to_time(
         cal.duration_holdout, cal.frequency_cal, cal.recency_cal, cal.T_cal)
