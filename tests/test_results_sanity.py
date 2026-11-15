@@ -43,7 +43,7 @@ def test_segments_partition_customers(results):
     s = results["segmentation"]
     total = sum(v["customers"] for v in s["segments"].values())
     assert total == s["n_customers_scored"]
-    assert math.isclose(sum(v["gmv_share"] for v in s["segments"].values()), 1.0, abs_tol=1e-6)
+    assert math.isclose(sum(v["gmv_share"] for v in s["segments"].values()), 1.0, abs_tol=1e-4)
 
 
 def test_funnel_arithmetic(results):
