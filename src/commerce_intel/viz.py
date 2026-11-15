@@ -21,7 +21,7 @@ def apply_style() -> None:
             "axes.edgecolor": GRID,
             "axes.labelcolor": TEXT_SECONDARY,
             "axes.titlecolor": TEXT_PRIMARY,
-            "axes.titleweight": "semibold",
+            "axes.titleweight": "bold",
             "axes.titlesize": 12,
             "axes.titlelocation": "left",
             "axes.grid": True,

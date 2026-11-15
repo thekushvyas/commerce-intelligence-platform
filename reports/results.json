@@ -44,48 +44,48 @@
     "n_customers_scored": 88498,
     "segments": {
       "Lapsed High-Value": {
-        "customers": 12968,
-        "gmv_share": 0.275272,
-        "gmv_index": 1.878552
+        "customers": 12971,
+        "gmv_share": 0.275382,
+        "gmv_index": 1.878864
       },
       "High-Value New": {
-        "customers": 6566,
-        "gmv_share": 0.201755,
-        "gmv_index": 2.7193
+        "customers": 6568,
+        "gmv_share": 0.201784,
+        "gmv_index": 2.718861
       },
       "Promising": {
-        "customers": 27658,
-        "gmv_share": 0.183058,
-        "gmv_index": 0.585734
+        "customers": 27657,
+        "gmv_share": 0.183046,
+        "gmv_index": 0.585719
       },
       "Need Attention": {
-        "customers": 17141,
-        "gmv_share": 0.177013,
-        "gmv_index": 0.913906
+        "customers": 17140,
+        "gmv_share": 0.176896,
+        "gmv_index": 0.913357
       },
       "Hibernating": {
-        "customers": 21474,
-        "gmv_share": 0.106582,
-        "gmv_index": 0.439243
+        "customers": 21471,
+        "gmv_share": 0.106572,
+        "gmv_index": 0.439261
       },
       "At Risk": {
-        "customers": 1516,
-        "gmv_share": 0.030717,
-        "gmv_index": 1.793116
+        "customers": 1517,
+        "gmv_share": 0.030732,
+        "gmv_index": 1.792847
       },
       "Champions": {
-        "customers": 1175,
-        "gmv_share": 0.025603,
-        "gmv_index": 1.928383
+        "customers": 1174,
+        "gmv_share": 0.025588,
+        "gmv_index": 1.928846
       }
     },
-    "champions_customer_share": 0.013277,
-    "champions_gmv_share": 0.025603,
-    "lapsed_high_value_customers": 12968,
-    "lapsed_high_value_gmv_share": 0.275272,
-    "hibernating_customer_share": 0.24265,
+    "champions_customer_share": 0.013266,
+    "champions_gmv_share": 0.025588,
+    "lapsed_high_value_customers": 12971,
+    "lapsed_high_value_gmv_share": 0.275382,
+    "hibernating_customer_share": 0.242616,
     "kmeans_k": 4,
-    "kmeans_silhouette": 0.374688,
+    "kmeans_silhouette": 0.372591,
     "one_time_buyer_share": 0.969593
   },
   "clv": {
@@ -210,13 +210,13 @@
     "best_model": "naive_last4w_mean",
     "backtest_wape": {
       "naive_last4w_mean": 0.143269,
-      "holt_damped": 0.170159,
-      "sarima_log": 0.244846
+      "holt_damped": 0.170022,
+      "sarima_log": 0.244875
     },
     "backtest_bias": {
       "naive_last4w_mean": 0.014039,
-      "holt_damped": 0.085379,
-      "sarima_log": 0.235283
+      "holt_damped": 0.095253,
+      "sarima_log": 0.235313
     },
     "next_8w_gmv_best": 2437381.44,
     "last_8w_gmv_actual": 2071818.64,
@@ -229,26 +229,26 @@
     "n_test": 32802,
     "train_late_rate": 0.066293,
     "test_late_rate": 0.071825,
-    "gbm_auc": 0.735469,
-    "gbm_pr_auc": 0.175775,
-    "gbm_brier": 0.063822,
-    "lr_auc": 0.725297,
-    "lr_pr_auc": 0.161049,
+    "gbm_auc": 0.744369,
+    "gbm_pr_auc": 0.17905,
+    "gbm_brier": 0.063485,
+    "lr_auc": 0.724168,
+    "lr_pr_auc": 0.160334,
     "split_date": "2018-03-01",
-    "top_decile_late_rate": 0.188967,
-    "top_decile_lift": 2.630937,
-    "top_decile_capture": 0.263158,
-    "top2_decile_capture": 0.466893,
-    "threshold_p30": 0.200042,
-    "recall_at_p30": 0.087861,
-    "flag_rate_at_p30": 0.021035,
+    "top_decile_late_rate": 0.202682,
+    "top_decile_lift": 2.821892,
+    "top_decile_capture": 0.282258,
+    "top2_decile_capture": 0.485569,
+    "threshold_p30": 0.222119,
+    "recall_at_p30": 0.078523,
+    "flag_rate_at_p30": 0.018779,
     "top_features": [
       "promised_days",
       "purchase_month_num",
       "seller_prior_avg_days",
-      "log_distance",
+      "c_lng",
       "freight_value",
-      "c_lat"
+      "log_distance"
     ]
   },
   "propensity": {
@@ -278,12 +278,12 @@
     "aov_2018": 165.641593,
     "aov_sd_2018": 228.278129,
     "detractor_rate_late_2018": 0.613212,
-    "detractor_rate_flagged_top20pct_2018": 0.178126,
+    "detractor_rate_flagged_top20pct_2018": 0.185624,
     "tests": {
       "T1 Proactive delay notification": {
-        "n_per_arm": 1037,
-        "weeks": 8,
-        "baseline": 0.178126,
+        "n_per_arm": 988,
+        "weeks": 7,
+        "baseline": 0.185624,
         "mde_relative": -0.25,
         "feasible": true
       },

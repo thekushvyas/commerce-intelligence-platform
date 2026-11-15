@@ -27,8 +27,8 @@ def step_warehouse() -> None:
     env = {**os.environ, "DBT_PROFILES_DIR": str(DBT_DIR)}
     for cmd in (["dbt", "build", "--no-use-colors"],):
         r = subprocess.run(cmd, cwd=DBT_DIR, env=env, text=True, capture_output=True)
-        tail = "\n".join(r.stdout.splitlines()[-6:])
-        print(tail)
+        done = [ln for ln in r.stdout.splitlines() if "Done." in ln or "Finished running" in ln]
+        print("\n".join(done) if done else "\n".join(r.stdout.splitlines()[-6:]))
         if r.returncode != 0:
             print(r.stdout[-4000:], r.stderr[-2000:], file=sys.stderr)
             raise SystemExit("dbt build failed")
