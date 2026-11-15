@@ -39,7 +39,7 @@ Olist is a Brazilian marketplace that connects small sellers to large e-commerce
 
 **4. Judge acquisition channels on GMV per lead, not close rate.** Paid search produces **R$115** of marketplace GMV per marketing-qualified lead and organic search R$103; social produces **R$38** (close rate 5.6% vs 12%). 14% of leads have no recorded source - fix tracking before re-allocating budget.
 
-**5. Lateness is predictable at checkout.** A gradient-boosting model using only information available at purchase (promised days, distance, freight, basket, the seller's *prior* on-time record) scores **AUC 0.74** on a forward-in-time holdout; the riskiest 20% of orders contain **47%** of all late deliveries - enough to run proactive delay notifications.
+**5. Lateness is predictable at checkout.** A gradient-boosting model using only information available at purchase (promised days, distance, freight, basket, the seller's *prior* on-time record) scores **AUC ≈ 0.74** on a forward-in-time holdout; the riskiest 20% of orders contain **~48%** of all late deliveries - enough to run proactive delay notifications.
 
 <p align="center">
 <img src="reports/figures/11_review_by_delivery_bucket.png" width="49%"> <img src="reports/figures/13_detractor_odds_ratios.png" width="49%">
@@ -98,7 +98,7 @@ commerce-intelligence-platform/
 | Model | Purpose | Design | Result |
 |---|---|---|---|
 | Delivery → review logit | *Why* do customers leave 1-2 stars? | logistic regression, lateness buckets + controls, odds ratios with 95% CI, counterfactual "avoidable detractors" | pseudo-R² 0.19; lateness dominates every other driver |
-| **Late-delivery risk** | *Which* orders will be late - at checkout | HistGradientBoosting vs L2 logistic; point-in-time seller history (no leakage); train < Mar-2018, test Mar-Jul 2018 | **AUC 0.74**, PR-AUC 0.18 vs 7.2% base; top decile 2.6x lift; calibrated |
+| **Late-delivery risk** | *Which* orders will be late - at checkout | HistGradientBoosting vs L2 logistic; point-in-time seller history (no leakage); train < Mar-2018, test Mar-Jul 2018 | **AUC ≈ 0.74**, PR-AUC ≈ 0.18 vs 7.2% base; top decile ~2.6x lift; calibrated (exact decimals vary ±0.005 run to run with multithreaded boosting) |
 | Repeat-purchase propensity | Who buys again within 180 days? | same family; label excludes same-day split orders | **AUC 0.57 - a weak result, kept on purpose**: first-order attributes don't predict loyalty, so retention is a structural problem, not a targeting problem |
 | BG/NBD + spend | 12-month CLV | lifetimes; Gamma-Gamma rejected (q < 1) → empirical-Bayes spend shrinkage | holdout total repeat purchases within +12%; top decile = 38% of predicted CLV |
 | Weekly GMV forecast | 8-week outlook | 6-fold rolling-origin backtest: last-4-week mean vs Holt damped vs log-SARIMA | naive baseline wins (WAPE 14.8% vs 15.6% vs 27%); the value is the harness, not the point forecast |
