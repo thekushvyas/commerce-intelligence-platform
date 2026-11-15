@@ -68,7 +68,7 @@ def build() -> Path:
                          text=[f"{s:.1%}" for s in cat.gmv_share], textposition="outside",
                          hovertemplate="%{y}<br>GMV R$%{x:,.0f}<extra></extra>"))
     f.update_layout(title="Top 12 categories by GMV (share of total)")
-    f.update_xaxes(tickprefix="R$", tickformat="~s", showgrid=True, gridcolor="#e6e5e1")
+    f.update_xaxes(tickprefix="R$", tickformat="~s", showgrid=True, gridcolor="#e6e5e1", range=[0, cat.gmv.max() * 1.15])
     f.update_yaxes(showgrid=False)
     charts["category"] = _fig(f, 420)
 
