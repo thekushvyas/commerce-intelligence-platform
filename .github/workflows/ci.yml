@@ -24,7 +24,7 @@ jobs:
           key: olist-raw-v1
       - name: Download + validate raw data
         run: make data
-      - name: Build warehouse (dbt build = models + 60 tests)
+      - name: Build warehouse (dbt build = models + 59 tests)
         run: make warehouse
       - name: Run analyses
         run: make analyze
