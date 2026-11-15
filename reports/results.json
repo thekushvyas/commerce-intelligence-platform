@@ -1,0 +1,313 @@
+{
+  "kpis": {
+    "window": "2017-01-01..2018-07-31",
+    "gmv_total": 14782895.1,
+    "orders": 92580,
+    "customers": 89503,
+    "sellers": 2904,
+    "aov": 159.676983,
+    "freight_share_of_product_revenue": 0.165198,
+    "late_rate": 0.068312,
+    "avg_review": 4.076803,
+    "detractor_rate": 0.14887,
+    "cancel_rate": 0.011784,
+    "items_per_order": 1.134489,
+    "avg_installments": 2.939371,
+    "gmv_yoy_ytd": 1.596891,
+    "orders_yoy_ytd": 1.547567,
+    "top_category": "health_beauty",
+    "top_category_share": 0.087832,
+    "top10_category_share": 0.624096,
+    "credit_card_value_share": 0.783798,
+    "boleto_value_share": 0.182004,
+    "peak_day_hour": "Tue 14:00",
+    "black_friday_month_gmv": 1179143.77,
+    "peak_month": "2017-11"
+  },
+  "retention": {
+    "repeat_customer_rate": 0.030407,
+    "repeat_order_gmv_share": 0.030386,
+    "month1_retention_avg": 0.004812,
+    "month3_retention_avg": 0.00257,
+    "month6_retention_avg": 0.002609,
+    "month12_retention_avg": 0.002354,
+    "best_repeat_category": "home_appliances",
+    "best_repeat_category_rate": 0.091437,
+    "worst_repeat_category": "consoles_games",
+    "worst_repeat_category_rate": 0.017341,
+    "median_days_to_2nd_order": 25.0,
+    "p75_days_to_2nd_order": 116.0,
+    "share_2nd_order_within_30d": 0.52182,
+    "share_2nd_order_same_day": 0.317792
+  },
+  "segmentation": {
+    "n_customers_scored": 88498,
+    "segments": {
+      "Lapsed High-Value": {
+        "customers": 12968,
+        "gmv_share": 0.275272,
+        "gmv_index": 1.878552
+      },
+      "High-Value New": {
+        "customers": 6566,
+        "gmv_share": 0.201755,
+        "gmv_index": 2.7193
+      },
+      "Promising": {
+        "customers": 27658,
+        "gmv_share": 0.183058,
+        "gmv_index": 0.585734
+      },
+      "Need Attention": {
+        "customers": 17141,
+        "gmv_share": 0.177013,
+        "gmv_index": 0.913906
+      },
+      "Hibernating": {
+        "customers": 21474,
+        "gmv_share": 0.106582,
+        "gmv_index": 0.439243
+      },
+      "At Risk": {
+        "customers": 1516,
+        "gmv_share": 0.030717,
+        "gmv_index": 1.793116
+      },
+      "Champions": {
+        "customers": 1175,
+        "gmv_share": 0.025603,
+        "gmv_index": 1.928383
+      }
+    },
+    "champions_customer_share": 0.013277,
+    "champions_gmv_share": 0.025603,
+    "lapsed_high_value_customers": 12968,
+    "lapsed_high_value_gmv_share": 0.275272,
+    "hibernating_customer_share": 0.24265,
+    "kmeans_k": 4,
+    "kmeans_silhouette": 0.374688,
+    "one_time_buyer_share": 0.969593
+  },
+  "clv": {
+    "bgnbd_params": {
+      "r": 0.015873,
+      "alpha": 65.725155,
+      "a": 0.100291,
+      "b": 0.017164
+    },
+    "gg_params": {
+      "p": 4.120999,
+      "q": 0.496169,
+      "v": 3.847388
+    },
+    "gg_valid_q_gt_1": false,
+    "spend_model": "empirical_bayes_shrinkage",
+    "population_aov": 160.538818,
+    "freq_monetary_corr": 0.001854,
+    "avg_clv_12m": 3.297695,
+    "median_clv_12m": 2.211989,
+    "top_decile_clv_share": 0.381769,
+    "top_decile_avg_clv": 12.588723,
+    "avg_p_alive": 0.981495,
+    "holdout_actual_purchases": 662.0,
+    "holdout_predicted_purchases": 741.388506,
+    "holdout_error_pct": 0.119922,
+    "expected_repeat_purchases_12m_total": 1824.158867
+  },
+  "delivery": {
+    "orders_modelled": 89230,
+    "late_rate": 0.067164,
+    "avg_delivery_days": 12.835532,
+    "median_delivery_days": 10.583333,
+    "avg_promised_days": 24.880634,
+    "review_on_time": 4.283708,
+    "review_late": 2.224095,
+    "detractor_rate_on_time": 0.093792,
+    "detractor_rate_late": 0.63691,
+    "late_share_of_all_detractors": 0.328372,
+    "odds_ratio_late_1_3": 3.814203,
+    "odds_ratio_late_4_7": 14.667266,
+    "odds_ratio_late_8p": 19.415079,
+    "odds_ratio_multi_seller": 3.493774,
+    "odds_ratio_per_delivery_week": 1.202343,
+    "logit_pseudo_r2": 0.186078,
+    "detractors_avoidable_if_on_time": 2879.633211,
+    "worst_late_month": "2018-03",
+    "worst_late_month_rate": 0.189633,
+    "slowest_state": "RR",
+    "slowest_state_days": 29.907292,
+    "fastest_state": "SP",
+    "fastest_state_days": 8.952945,
+    "median_transit_days_late": 27.083333,
+    "median_transit_days_on_time": 7.041667,
+    "median_handling_days_late": 3.041667,
+    "median_handling_days_on_time": 1.791667
+  },
+  "sellers": {
+    "active_sellers": 2878,
+    "top1pct_gmv_share": 0.250621,
+    "top10pct_gmv_share": 0.665176,
+    "top20pct_gmv_share": 0.818382,
+    "gini": 0.784489,
+    "sellers_single_order": 548,
+    "sellers_single_order_share": 0.19041,
+    "median_seller_gmv": 979.44,
+    "tier_a_sellers": 288,
+    "tier_a_gmv_share": 0.346261,
+    "problem_sellers": 19,
+    "problem_sellers_gmv": 278626.2,
+    "problem_sellers_orders": 1959,
+    "seller_active_m1": 0.573185,
+    "seller_active_m3": 0.525746,
+    "seller_active_m6": 0.440011,
+    "sp_seller_gmv_share": 0.647353
+  },
+  "funnel": {
+    "mqls": 8000,
+    "deals": 842,
+    "activated": 380,
+    "close_rate": 0.10525,
+    "activation_rate": 0.451306,
+    "mql_to_active": 0.0475,
+    "gmv_from_funnel_sellers": 775815.63,
+    "median_days_to_close": 14.0,
+    "median_days_won_to_first_sale": 44.0,
+    "best_channel_gmv_per_mql": "paid_search",
+    "best_channel_value": 114.754136,
+    "worst_channel_gmv_per_mql": "display",
+    "worst_channel_value": 10.236864,
+    "paid_search_gmv_per_mql": 114.754136,
+    "organic_gmv_per_mql": 102.768545,
+    "social_gmv_per_mql": 38.047015,
+    "social_close_rate": 0.055556,
+    "top5_activated_sellers_gmv_share": 0.32243,
+    "n_declared_revenue_deals": 45,
+    "unknown_origin_share": 0.144875,
+    "declared_vs_realised_log_corr": null,
+    "best_segment_gmv": "watches",
+    "best_segment_gmv_value": 126204.31,
+    "top_rep_deals": 133,
+    "n_sales_reps": 22
+  },
+  "geo": {
+    "sp_gmv_share": 0.368762,
+    "sp_delivery_days": 8.952945,
+    "sp_freight_ratio": 0.251009,
+    "top3_states_gmv_share": 0.621776,
+    "southeast_gmv_share": 0.642352,
+    "north_gmv_share": 0.026427,
+    "north_delivery_days": 23.872923,
+    "north_freight_ratio": 0.506836,
+    "northeast_late_rate": 0.143242,
+    "orders_sp_to_sp_share": 0.313326,
+    "orders_from_sp_sellers_share": 0.709568,
+    "interstate_order_share": 0.646663
+  },
+  "forecast": {
+    "weeks": 84,
+    "horizon_weeks": 8,
+    "folds": 6,
+    "best_model": "naive_last4w_mean",
+    "backtest_wape": {
+      "naive_last4w_mean": 0.143269,
+      "holt_damped": 0.170159,
+      "sarima_log": 0.244846
+    },
+    "backtest_bias": {
+      "naive_last4w_mean": 0.014039,
+      "holt_damped": 0.085379,
+      "sarima_log": 0.235283
+    },
+    "next_8w_gmv_best": 2437381.44,
+    "last_8w_gmv_actual": 2071818.64,
+    "avg_weekly_gmv_last_12w": 250713.42,
+    "peak_week": "2017-11-20",
+    "peak_week_gmv": 472612.61
+  },
+  "risk_model": {
+    "n_train": 57050,
+    "n_test": 32802,
+    "train_late_rate": 0.066293,
+    "test_late_rate": 0.071825,
+    "gbm_auc": 0.735469,
+    "gbm_pr_auc": 0.175775,
+    "gbm_brier": 0.063822,
+    "lr_auc": 0.725297,
+    "lr_pr_auc": 0.161049,
+    "split_date": "2018-03-01",
+    "top_decile_late_rate": 0.188967,
+    "top_decile_lift": 2.630937,
+    "top_decile_capture": 0.263158,
+    "top2_decile_capture": 0.466893,
+    "threshold_p30": 0.200042,
+    "recall_at_p30": 0.087861,
+    "flag_rate_at_p30": 0.021035,
+    "top_features": [
+      "promised_days",
+      "purchase_month_num",
+      "seller_prior_avg_days",
+      "log_distance",
+      "freight_value",
+      "c_lat"
+    ]
+  },
+  "propensity": {
+    "n_train": 36846,
+    "n_test": 12283,
+    "base_rate": 0.019702,
+    "gbm_auc": 0.548494,
+    "gbm_pr_auc": 0.027644,
+    "gbm_brier": 0.01929,
+    "lr_auc": 0.570412,
+    "lr_pr_auc": 0.024728,
+    "champion": "logistic",
+    "champion_auc": 0.570412,
+    "top_decile_lift": 1.404158,
+    "top2_decile_capture": 0.256198,
+    "top3_decile_capture": 0.384298,
+    "top_features": [
+      "category",
+      "payment_type",
+      "delivery_days",
+      "review_score",
+      "customer_state"
+    ]
+  },
+  "experiment": {
+    "orders_per_week_2018": 1455.73913,
+    "aov_2018": 165.641593,
+    "aov_sd_2018": 228.278129,
+    "detractor_rate_late_2018": 0.613212,
+    "detractor_rate_flagged_top20pct_2018": 0.178126,
+    "tests": {
+      "T1 Proactive delay notification": {
+        "n_per_arm": 1037,
+        "weeks": 8,
+        "baseline": 0.178126,
+        "mde_relative": -0.25,
+        "feasible": true
+      },
+      "T2 Seller shipping SLA (handling <= 2 days)": {
+        "n_per_arm": 4586,
+        "weeks": 11,
+        "baseline": 0.071825,
+        "mde_relative": -0.2,
+        "feasible": true
+      },
+      "T3 Win-back campaign for Lapsed High-Value": {
+        "n_per_arm": 6379,
+        "weeks": null,
+        "baseline": 0.012,
+        "mde_relative": 0.5,
+        "feasible": true
+      },
+      "T4 Free-shipping threshold (R$150)": {
+        "n_per_arm": 11926,
+        "weeks": 17,
+        "baseline": 165.641593,
+        "mde_relative": 0.05,
+        "feasible": false
+      }
+    }
+  }
+}

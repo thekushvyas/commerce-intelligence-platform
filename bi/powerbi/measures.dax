@@ -1,0 +1,61 @@
+// Power BI - DAX measures for the Commerce Intelligence model.
+// Create a blank table "Measures" and add these. Relationships: see model.md.
+
+GMV = SUM ( FactOrders[gmv] )
+Orders = COUNTROWS ( FactOrders )
+Customers = DISTINCTCOUNT ( FactOrders[customer_unique_id] )
+Active Sellers = DISTINCTCOUNT ( FactOrders[primary_seller_id] )
+AOV = DIVIDE ( [GMV], [Orders] )
+Items per Order = DIVIDE ( SUM ( FactOrders[n_items] ), [Orders] )
+Freight Share = DIVIDE ( SUM ( FactOrders[freight_value] ), SUM ( FactOrders[product_revenue] ) )
+
+Delivered Orders = CALCULATE ( [Orders], FactOrders[is_delivered] = TRUE () )
+Late Orders = CALCULATE ( [Orders], FactOrders[is_late] = TRUE () )
+Late Rate = DIVIDE ( [Late Orders], [Delivered Orders] )
+Avg Delivery Days = AVERAGE ( FactOrders[delivery_days] )
+Avg Promised Days = AVERAGE ( FactOrders[promised_days] )
+
+Avg Review = AVERAGE ( FactOrders[review_score] )
+Detractor Rate = DIVIDE ( CALCULATE ( [Orders], FactOrders[is_detractor] = TRUE () ), CALCULATE ( [Orders], NOT ISBLANK ( FactOrders[review_score] ) ) )
+Avg Review On Time = CALCULATE ( [Avg Review], FactOrders[is_late] = FALSE () )
+Avg Review Late = CALCULATE ( [Avg Review], FactOrders[is_late] = TRUE () )
+Review Gap (On time - Late) = [Avg Review On Time] - [Avg Review Late]
+
+Repeat Orders = CALCULATE ( [Orders], FactOrders[is_repeat_order] = TRUE () )
+Repeat Order Share = DIVIDE ( [Repeat Orders], [Orders] )
+Repeat Customers = CALCULATE ( DISTINCTCOUNT ( DimCustomer[customer_unique_id] ), DimCustomer[is_repeat_customer] = TRUE () )
+Repeat Customer Rate = DIVIDE ( [Repeat Customers], DISTINCTCOUNT ( DimCustomer[customer_unique_id] ) )
+
+Cancel Rate = DIVIDE ( CALCULATE ( [Orders], FactOrders[is_cancelled] = TRUE () ), [Orders] )
+
+// Time intelligence (requires DimDate marked as date table, related on FactOrders[purchase_date] -> DimDate[date_day])
+GMV PY = CALCULATE ( [GMV], SAMEPERIODLASTYEAR ( DimDate[date_day] ) )
+GMV YoY % = DIVIDE ( [GMV] - [GMV PY], [GMV PY] )
+GMV MTD = TOTALMTD ( [GMV], DimDate[date_day] )
+GMV Rolling 4W = CALCULATE ( [GMV], DATESINPERIOD ( DimDate[date_day], MAX ( DimDate[date_day] ), -28, DAY ) )
+GMV Running Total = CALCULATE ( [GMV], FILTER ( ALL ( DimDate ), DimDate[date_day] <= MAX ( DimDate[date_day] ) ) )
+
+// Seller concentration
+Seller GMV Rank = RANKX ( ALL ( DimSeller[seller_id] ), [GMV], , DESC, DENSE )
+Top 10% Sellers GMV Share =
+VAR n = CALCULATE ( DISTINCTCOUNT ( FactOrders[primary_seller_id] ), ALL ( DimSeller ) )
+VAR cutoff = ROUNDUP ( n * 0.1, 0 )
+VAR topGMV = SUMX ( FILTER ( ADDCOLUMNS ( ALL ( DimSeller[seller_id] ), "@r", [Seller GMV Rank] ), [@r] <= cutoff ), [GMV] )
+RETURN DIVIDE ( topGMV, CALCULATE ( [GMV], ALL ( DimSeller ) ) )
+
+// Funnel
+MQLs = COUNTROWS ( FactSellerFunnel )
+Closed Deals = CALCULATE ( [MQLs], FactSellerFunnel[is_closed] = TRUE () )
+Activated Sellers = CALCULATE ( [MQLs], FactSellerFunnel[is_activated] = TRUE () )
+Close Rate = DIVIDE ( [Closed Deals], [MQLs] )
+Activation Rate = DIVIDE ( [Activated Sellers], [Closed Deals] )
+Funnel GMV = SUM ( FactSellerFunnel[seller_gmv] )
+GMV per MQL = DIVIDE ( [Funnel GMV], [MQLs] )
+
+// Risk model
+High Risk Orders = CALCULATE ( COUNTROWS ( OrderRiskScores ), OrderRiskScores[p_late] >= 0.15 )
+Avg P(Late) = AVERAGE ( OrderRiskScores[p_late] )
+
+// CLV / RFM
+Predicted 12m CLV = SUM ( CustomerScores[clv_12m] )
+Avg P(Alive) = AVERAGE ( CustomerScores[p_alive] )

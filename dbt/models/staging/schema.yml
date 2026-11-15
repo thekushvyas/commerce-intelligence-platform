@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: order_status
+        tests:
+          - accepted_values:
+              values: ['delivered', 'shipped', 'canceled', 'unavailable', 'invoiced', 'processing', 'created', 'approved']
+      - name: purchased_at
+        tests: [not_null]
+  - name: stg_order_items
+    tests:
+      - unique_combination:
+          columns: ['order_id', 'order_item_id']
+    columns:
+      - name: order_id
+        tests:
+          - relationships: {to: ref('stg_orders'), field: order_id}
+      - name: item_price
+        tests: [not_null]
+  - name: stg_order_payments
+    columns:
+      - name: payment_type
+        tests:
+          - accepted_values: {values: ['credit_card', 'boleto', 'voucher', 'debit_card']}
+  - name: stg_order_reviews
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: review_score
+        tests:
+          - accepted_values: {values: [1, 2, 3, 4, 5], quote: false}
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: customer_unique_id
+        tests: [not_null]
+  - name: stg_sellers
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
+  - name: stg_products
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+      - name: category
+        tests: [not_null]
+  - name: stg_geolocation
+    columns:
+      - name: zip_prefix
+        tests: [unique, not_null]
+  - name: stg_marketing_qualified_leads
+    columns:
+      - name: mql_id
+        tests: [unique, not_null]
+  - name: stg_closed_deals
+    columns:
+      - name: mql_id
+        tests: [unique, not_null]
+      - name: seller_id
+        tests: [not_null]

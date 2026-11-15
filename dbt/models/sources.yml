@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    description: >
+      Raw Olist Brazilian e-commerce public dataset (Kaggle, CC BY-NC-SA 4.0) plus the
+      companion Marketing Funnel dataset. Read directly from CSV by DuckDB; nothing is copied.
+    meta:
+      external_location: "read_csv_auto('{{ env_var('CI_RAW_DIR', '../data/raw') }}/{name}.csv', header=true, all_varchar=true)"
+    tables:
+      - name: olist_orders_dataset
+      - name: olist_order_items_dataset
+      - name: olist_order_payments_dataset
+      - name: olist_order_reviews_dataset
+      - name: olist_customers_dataset
+      - name: olist_sellers_dataset
+      - name: olist_products_dataset
+      - name: olist_geolocation_dataset
+      - name: product_category_name_translation
+      - name: olist_marketing_qualified_leads_dataset
+      - name: olist_closed_deals_dataset

@@ -1,0 +1,13 @@
+{
+  "version": "0.1",
+  "connections": [
+    {
+      "details": {
+        "protocol": "folder",
+        "address": { "path": "REPLACE_WITH_FULL_PATH_TO/commerce-intelligence-platform/data/marts" }
+      },
+      "options": {},
+      "mode": "Import"
+    }
+  ]
+}

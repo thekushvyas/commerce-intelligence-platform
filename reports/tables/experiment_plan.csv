@@ -1,0 +1,5 @@
+test,hypothesis,unit,metric,baseline,mde_relative,eligible_per_week,n_per_arm,weeks_to_run,feasible
+T1 Proactive delay notification,"Telling customers whose order is flagged high-risk (top 2 risk deciles) that it may arrive late, with a new ETA and a small voucher, cuts 1-2 star reviews among flagged orders.",order,detractor rate among flagged orders,0.17812644208583295,-0.25,291.1478260869565,1037,8.0,True
+T2 Seller shipping SLA (handling <= 2 days),Enforcing a 2-day handling SLA for B/C/D-tier sellers reduces late deliveries.,order,late delivery rate,0.07182488872629718,-0.2,873.4434782608695,4586,11.0,True
+T3 Win-back campaign for Lapsed High-Value,A 10% voucher emailed to Lapsed High-Value customers lifts 60-day repurchase vs a holdout.,customer,60-day repurchase rate,0.012,0.5,,6379,,True
+T4 Free-shipping threshold (R$150),Free shipping above R$150 raises AOV without eroding contribution.,order,average order value,165.6415930947958,0.05,1455.7391304347825,11926,17.0,False

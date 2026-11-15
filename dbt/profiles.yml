@@ -1,0 +1,7 @@
+commerce_intel:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('CI_DUCKDB_PATH', '../data/warehouse/commerce_intel.duckdb') }}"
+      threads: 4
